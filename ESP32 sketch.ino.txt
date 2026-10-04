@@ -1,0 +1,48 @@
+const char* conditions[] = {
+  "NORMAL",
+  "ALCOHOL_FLAG",
+  "DROWSY_FLAG",
+  "THEFT_FLAG",
+  "ACCIDENT_FLAG"
+};
+const int numberOfConditions = 5;
+void setup() {
+  Serial.begin(115200);
+  Serial.println("Smart Safety Helmet - Demo");
+  Serial.println("Simulated signals only");
+}
+void loop() {
+  static int testCase = 0;
+
+  bool alcoholFlag = (testCase == 1);
+  bool drowsyFlag = (testCase == 2);
+  bool theftFlag = (testCase == 3);
+  bool accidentFlag = (testCase == 4);
+
+bool alarm = alcoholFlag ||
+             drowsyFlag ||
+             theftFlag ||
+             accidentFlag;
+
+Serial.print("Case: ");
+Serial.print(conditions[testCase]);
+
+Serial.print(" | alcohol=");
+Serial.print(alcoholFlag);
+
+Serial.print(" | drowsy=");
+Serial.print(drowsyFlag);
+
+Serial.print(" | theft=");
+Serial.print(theftFlag);
+
+Serial.print(" | accident=");
+Serial.print(accidentFlag);
+
+Serial.print(" | alarm=");
+Serial.println(alarm);
+
+testCase = (testCase + 1) % numberOfConditions;
+delay(2000);
+}
+

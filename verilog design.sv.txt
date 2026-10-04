@@ -1,0 +1,26 @@
+design.sv
+
+module helmet_alert (
+    input  wire alcohol_flag,
+    input  wire drowsy_flag,
+    input  wire theft_flag,
+    input  wire accident_flag,
+
+    output wire alarm,
+    output wire alcohol_led,
+    output wire drowsy_led,
+    output wire theft_led,
+    output wire accident_led
+);
+
+    assign alcohol_led  = alcohol_flag;
+    assign drowsy_led   = drowsy_flag;
+    assign theft_led    = theft_flag;
+    assign accident_led = accident_flag;
+
+    assign alarm = alcohol_flag |
+                   drowsy_flag  |
+                   theft_flag   |
+                   accident_flag;
+
+endmodule

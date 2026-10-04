@@ -1,0 +1,56 @@
+module helmet_alert_tb;
+
+    reg alcohol_flag;
+    reg drowsy_flag;
+    reg theft_flag;
+    reg accident_flag;
+
+    wire alarm;
+    wire alcohol_led;
+    wire drowsy_led;
+    wire theft_led;
+    wire accident_led;
+
+    helmet_alert dut (
+        .alcohol_flag(alcohol_flag),
+        .drowsy_flag(drowsy_flag),
+        .theft_flag(theft_flag),
+        .accident_flag(accident_flag),
+        .alarm(alarm),
+        .alcohol_led(alcohol_led),
+        .drowsy_led(drowsy_led),
+        .theft_led(theft_led),
+        .accident_led(accident_led)
+    );
+
+    initial begin $monitor( "time=%0t alcohol=%b drowsy=%b theft=%b accident=%b alarm=%b", $time, alcohol_flag, drowsy_flag, theft_flag, accident_flag, alarm );
+        
+
+        alcohol_flag  = 0;
+        drowsy_flag   = 0;
+        theft_flag    = 0;
+        accident_flag = 0;
+        #10;
+
+        alcohol_flag = 1;
+        #10;
+
+        alcohol_flag = 0;
+        drowsy_flag = 1;
+        #10;
+
+        drowsy_flag = 0;
+        theft_flag = 1;
+        #10;
+
+        theft_flag = 0;
+        accident_flag = 1;
+        #10;
+
+        accident_flag = 0;
+        #10;
+
+        $finish;
+    end
+
+endmodule
